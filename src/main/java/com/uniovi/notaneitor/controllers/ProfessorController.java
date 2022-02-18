@@ -3,13 +3,14 @@ package com.uniovi.notaneitor.controllers;
 import com.uniovi.notaneitor.entities.Professor;
 import com.uniovi.notaneitor.services.ProfessorService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 public class ProfessorController {
 
     @Autowired
-    ProfessorService professorService;
+    private ProfessorService professorService;
 
     @RequestMapping(value = "/professor/add", method = RequestMethod.POST)
     public String addProfessor(@ModelAttribute Professor profesor){
