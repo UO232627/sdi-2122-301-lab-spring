@@ -4,6 +4,7 @@ import javax.persistence.*;
 import java.util.Set;
 
 @Entity
+@Table(name="user")
 public class User {
 
     @Id
@@ -13,7 +14,10 @@ public class User {
     private String dni;
     private String name;
     private String lastName;
-    private String role;
+
+    private String password;
+    @Transient
+    private String passwordConfirm;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private Set<Mark> marks;
@@ -45,10 +49,6 @@ public class User {
         this.lastName = lastName;
     }
 
-    public void setRole(String role) {
-        this.role = role;
-    }
-
     public void setMarks(Set<Mark> marks) {
         this.marks = marks;
     }
@@ -69,11 +69,23 @@ public class User {
         return lastName;
     }
 
-    public String getRole() {
-        return role;
-    }
-
     public Set<Mark> getMarks() {
         return marks;
+    }
+
+    public String getPassword(){
+        return password;
+    }
+
+    public void setPassword(String password){
+        this.password = password;
+    }
+
+    public String getPasswordConfirm(){
+        return passwordConfirm;
+    }
+
+    public void setPasswordConfirm(String passwordConfirm){
+        this.passwordConfirm = passwordConfirm;
     }
 }
