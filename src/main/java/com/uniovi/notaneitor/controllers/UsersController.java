@@ -53,18 +53,18 @@ public class UsersController {
         return "redirect:/user/list";
     }
 
-    @RequestMapping(value = "/user/edit/{id}")
+    /*@RequestMapping(value = "/user/edit/{id}")
     public String getEdit(Model model, @PathVariable Long id) {
         User user = usersService.getUser(id);
         model.addAttribute("user", user);
         return "user/edit";
-    }
+    }*/
 
-    @RequestMapping(value = "/user/edit/{id}", method = RequestMethod.POST)
+    /*@RequestMapping(value = "/user/edit/{id}", method = RequestMethod.POST)
     public String setEdit(Model model, @PathVariable Long id, @ModelAttribute User user) {
         usersService.addUser(user);
         return "redirect:/user/details/" + id;
-    }
+    }*/
 
     @RequestMapping(value = "/signup", method = RequestMethod.GET)
     public String signup(Model model){
@@ -96,6 +96,29 @@ public class UsersController {
         User activeUser = usersService.getUserByDni(dni);
         model.addAttribute("markList", activeUser.getMarks());
         return "home";
+    }
+
+    @RequestMapping(value="/user/edit/{id}")
+    public String getEdit(Model model, @PathVariable Long id){
+        model.addAttribute("user", usersService.getUser(id));
+        model.addAttribute("usersList", usersService.getUsers());
+        return "/user/edit"; //Si lo hacemos asi estamos haciendo que el motor de plantillas devuelva directamente un html al navegador
+    }
+
+    @RequestMapping(value="/user/edit/{id}", method=RequestMethod.POST)
+    public String setEdit(@ModelAttribute User user, @PathVariable Long id){
+        User originalUser = usersService.getUser(id);
+        originalUser.setDni(user.getDni());
+        originalUser.setName(user.getName());
+        originalUser.setLastName(user.getLastName());
+        usersService.addUser(originalUser);
+        return "redirect:/user/details/" + id; //Con redirect estamos haciendo que el navegador haga una peticion GET
+    }
+
+    @RequestMapping("/user/list/update")
+    public String updateList(Model model){
+        model.addAttribute("usersList", usersService.getUsers());
+        return "/user/list::tableUsers";
     }
 
 }
