@@ -2,6 +2,7 @@ package com.uniovi.notaneitor.controllers;
 
 import com.uniovi.notaneitor.services.SecurityService;
 import com.uniovi.notaneitor.validators.SignUpFormValidator;
+import com.uniovi.notaneitor.validators.UserFormValidator;
 import org.springframework.beans.factory.annotation.*;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -23,6 +24,9 @@ public class UsersController {
 
     @Autowired
     private SignUpFormValidator signUpFormValidator;
+
+    @Autowired
+    private UserFormValidator userFormValidator;
 
     @RequestMapping("/user/list")
     public String getListado(Model model) {
@@ -106,7 +110,12 @@ public class UsersController {
     }
 
     @RequestMapping(value="/user/edit/{id}", method=RequestMethod.POST)
-    public String setEdit(@ModelAttribute User user, @PathVariable Long id){
+    public String setEdit(@ModelAttribute User user, @PathVariable Long id, BindingResult result){
+        userFormValidator.validate(user, result);
+        if (result.hasErrors()){
+            return "/user/edit";
+        }
+
         User originalUser = usersService.getUser(id);
         originalUser.setDni(user.getDni());
         originalUser.setName(user.getName());
