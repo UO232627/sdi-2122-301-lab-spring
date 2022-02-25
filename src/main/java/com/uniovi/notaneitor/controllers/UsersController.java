@@ -111,12 +111,15 @@ public class UsersController {
 
     @RequestMapping(value="/user/edit/{id}", method=RequestMethod.POST)
     public String setEdit(@ModelAttribute User user, @PathVariable Long id, BindingResult result){
-        userFormValidator.validate(user, result);
-        if (result.hasErrors()){
-            return "/user/edit";
-        }
+        //Esto está hecho asi porque se supone que a la hora de añadir un usuario también está validado y ya es correcto cuando editas
+        User originalUser = usersService.getUser(id); //Así solo se comprueba si modificas el dni, sino no hace la validación
+        if (!user.getDni().equals(originalUser.getDni())){
+            userFormValidator.validate(user, result);
 
-        User originalUser = usersService.getUser(id);
+            if (result.hasErrors()){
+                return "/user/edit";
+            }
+        }
         originalUser.setDni(user.getDni());
         originalUser.setName(user.getName());
         originalUser.setLastName(user.getLastName());

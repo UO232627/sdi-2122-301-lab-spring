@@ -1,8 +1,6 @@
 package com.uniovi.notaneitor.validators;
 
-import com.uniovi.notaneitor.entities.Mark;
 import com.uniovi.notaneitor.entities.User;
-import com.uniovi.notaneitor.services.MarksService;
 import com.uniovi.notaneitor.services.UsersService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
