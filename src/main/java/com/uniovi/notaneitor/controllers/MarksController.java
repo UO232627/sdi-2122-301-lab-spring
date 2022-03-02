@@ -11,6 +11,10 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import com.uniovi.notaneitor.entities.*;
 
+import javax.servlet.http.HttpSession;
+import java.util.HashSet;
+import java.util.Set;
+
 @Controller
 public class MarksController {
 
@@ -20,18 +24,19 @@ public class MarksController {
     private UsersService usersService;
     @Autowired
     private MarksFormValidator marksFormValidator;
+    @Autowired
+    private HttpSession httpSession;
 
     @RequestMapping("/mark/list")
     public String getList(Model model){
+        Set<Mark> consultedList = (Set<Mark>) httpSession.getAttribute("consultedList");
+        if (consultedList == null){
+            consultedList = new HashSet<Mark>();
+        }
+        model.addAttribute("consultedList", consultedList);
         model.addAttribute("markList", marksService.getMarks());
         return "/mark/list";
     }
-
-    /*@RequestMapping(value = "/mark/add", method = RequestMethod.POST)
-    public String setMark(@ModelAttribute Mark mark){
-        marksService.addMark(mark);
-        return "redirect:/mark/list";
-    }*/
 
     @RequestMapping("/mark/details/{id}")
     public String getDetail(Model model, @PathVariable Long id){
@@ -44,12 +49,6 @@ public class MarksController {
         marksService.deleteMark(id);
         return "redirect:/mark/list";
     }
-
-    /*@RequestMapping("/mark/add")
-    public String getMark(Model model){
-        model.addAttribute("usersList", usersService.getUsers());
-        return "/mark/add";
-    }*/
 
     @RequestMapping(value="/mark/edit/{id}")
     public String getEdit(Model model, @PathVariable Long id){
