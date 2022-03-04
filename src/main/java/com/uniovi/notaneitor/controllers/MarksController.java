@@ -117,4 +117,13 @@ public class MarksController {
         return "redirect:/mark/list";
     }
 
+    @RequestMapping("/mark/list/updateHome")
+    public String updateList(Model model, Principal principal){
+        String dni = principal.getName();
+        User user = usersService.getUserByDni(dni);
+        model.addAttribute("markList", marksService.getMarksForUser(user));
+
+        return "/mark/list::tableMarks";
+    }
+
 }

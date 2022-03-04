@@ -88,4 +88,16 @@ public class MarksService {
         return marks;
     }
 
+    public List<Mark> findAllMarksByUser(User user){
+        List<Mark> marks = marksRepository.findAllByUser(user);
+        return marks;
+    }
+
+    public List<Mark> getMarksForUser(User user){
+        List<Mark> marks = new ArrayList<Mark>();
+        marks = marksRepository.findAllByUser(user);
+
+        return marks;
+    }
+
 }

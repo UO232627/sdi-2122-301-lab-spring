@@ -9,6 +9,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 
 import javax.transaction.Transactional;
+import java.util.List;
 
 public interface MarksRepository extends CrudRepository<Mark, Long> {
 
@@ -27,5 +28,7 @@ public interface MarksRepository extends CrudRepository<Mark, Long> {
     Page<Mark> searchByDescriptionNameAndUser(Pageable pageable, String searchText, User user);
 
     Page<Mark> findAll(Pageable pageable);
+
+    List<Mark> findAllByUser(User user);
 
 }
