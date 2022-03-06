@@ -8,10 +8,12 @@ import javax.persistence.Id;
 public class Professor {
 
     @Id
+    @GeneratedValue
+    private Long id;
     private String dni;
-    private String nombre;
-    private String apellido;
-    private String categoria;
+    private String name;
+    private String surname;
+    private String category;
 
     public Professor(){
 
@@ -19,18 +21,18 @@ public class Professor {
 
     public Professor(String dni, String nombre, String apellido, String categoria) {
         this.dni = dni;
-        this.nombre = nombre;
-        this.apellido = apellido;
-        this.categoria = categoria;
+        this.name = nombre;
+        this.surname = apellido;
+        this.category = categoria;
     }
 
     @Override
     public String toString() {
         return "Professor{" +
                 "dni='" + dni + '\'' +
-                ", nombre='" + nombre + '\'' +
-                ", apellido='" + apellido + '\'' +
-                ", categoria='" + categoria + '\'' +
+                ", nombre='" + name + '\'' +
+                ", apellido='" + surname + '\'' +
+                ", categoria='" + category + '\'' +
                 '}';
     }
 
@@ -38,31 +40,39 @@ public class Professor {
         this.dni = dni;
     }
 
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
+    public void setName(String nombre) {
+        this.name = nombre;
     }
 
-    public void setApellido(String apellido) {
-        this.apellido = apellido;
+    public void setSurname(String apellido) {
+        this.surname = apellido;
     }
 
-    public void setCategoria(String categoria) {
-        this.categoria = categoria;
+    public void setCategory(String categoria) {
+        this.category = categoria;
     }
 
     public String getDni() {
         return dni;
     }
 
-    public String getNombre() {
-        return nombre;
+    public String getName() {
+        return name;
     }
 
-    public String getApellido() {
-        return apellido;
+    public String getSurname() {
+        return surname;
     }
 
-    public String getCategoria() {
-        return categoria;
+    public String getCategory() {
+        return category;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 }
