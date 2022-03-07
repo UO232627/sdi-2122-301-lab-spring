@@ -7,7 +7,7 @@ import org.openqa.selenium.WebElement;
 
 import java.util.List;
 
-public class PO_NavView extends PO_View{
+public class PO_NavView extends PO_View {
 
     /**
      * Clic en una de las opciones principales (a href) y comprueba que se vaya a la vista con el elemento de tipo type con el texto Destino
