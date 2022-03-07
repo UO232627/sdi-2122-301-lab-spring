@@ -111,13 +111,12 @@ class NotaneitorApplicationTests {
         PO_SignUpView.fillForm(driver, "99999990A", "Josefo", "Perez", "77777", "77777");
         List<WebElement> result = PO_SignUpView.checkElementByKey(driver, "Error.signup.dni.duplicate", PO_Properties.getSPANISH() );
 
-        //Comprobamos el error de DNI repetido.
         String checkText = PO_HomeView.getP().getString("Error.signup.dni.duplicate", PO_Properties.getSPANISH());
         Assertions.assertEquals(checkText , result.get(0).getText());
     }
 
     //PR06B. Prueba del formulario de registro. Nombre corto.
-    // Propiedad: Error.signup.dni.length
+    // Propiedad: Error.signup.name.length
     @Test
     @Order(8)
     public void PR06B() {
@@ -125,8 +124,63 @@ class NotaneitorApplicationTests {
         PO_SignUpView.fillForm(driver, "99999990B", "Jose", "Perez", "77777", "77777");
         List<WebElement> result = PO_SignUpView.checkElementByKey(driver, "Error.signup.name.length", PO_Properties.getSPANISH() );
 
-        //Comprobamos el error de Nombre corto de nombre corto .
         String checkText = PO_HomeView.getP().getString("Error.signup.name.length", PO_Properties.getSPANISH());
+        Assertions.assertEquals(checkText , result.get(0).getText());
+    }
+
+    //PR06C. Prueba del formulario de registro. Contraseñas distintas.
+    // Propiedad: Error.signup.passwordConfirm.coincidence
+    @Test
+    @Order(9)
+    public void PR06C() {
+        PO_HomeView.clickOption(driver, "signup", "class", "btn btn-primary");
+        PO_SignUpView.fillForm(driver, "99999990B", "Josefo", "Perez", "77777", "88888");
+        List<WebElement> result = PO_SignUpView.checkElementByKey(driver, "Error.signup.name.length", PO_Properties.getSPANISH() );
+
+        //Comprobamos el error de contraseñas distintas
+        String checkText = PO_HomeView.getP().getString("Error.signup.name.length", PO_Properties.getSPANISH());
+        Assertions.assertEquals(checkText , result.get(0).getText());
+    }
+
+    //PR06D. Prueba del formulario de registro. DNI corto.
+    // Propiedad: Error.signup.dni.length
+    @Test
+    @Order(10)
+    public void PR06D() {
+        PO_HomeView.clickOption(driver, "signup", "class", "btn btn-primary");
+        PO_SignUpView.fillForm(driver, "999", "Josefo", "Perez", "77777", "77777");
+        List<WebElement> result = PO_SignUpView.checkElementByKey(driver, "Error.signup.dni.length", PO_Properties.getSPANISH() );
+
+        //Comprobamos el error de DNI corto
+        String checkText = PO_HomeView.getP().getString("Error.signup.dni.length", PO_Properties.getSPANISH());
+        Assertions.assertEquals(checkText , result.get(0).getText());
+    }
+
+    //PR06E. Prueba del formulario de registro. Contraseña corta.
+    // Propiedad: Error.signup.password.length
+    @Test
+    @Order(11)
+    public void PR06E() {
+        PO_HomeView.clickOption(driver, "signup", "class", "btn btn-primary");
+        PO_SignUpView.fillForm(driver, "99999990B", "Josefo", "Perez", "1", "1");
+        List<WebElement> result = PO_SignUpView.checkElementByKey(driver, "Error.signup.password.length", PO_Properties.getSPANISH() );
+
+        //Comprobamos el error de contraseñas distintas
+        String checkText = PO_HomeView.getP().getString("Error.signup.password.length", PO_Properties.getSPANISH());
+        Assertions.assertEquals(checkText , result.get(0).getText());
+    }
+
+    //PR06F. Prueba del formulario de registro. DNI vacío.
+    // Propiedad: Error.signup.lastname
+    @Test
+    @Order(12)
+    public void PR06F() {
+        PO_HomeView.clickOption(driver, "signup", "class", "btn btn-primary");
+        PO_SignUpView.fillForm(driver, "99999990B", "Josefo", "Diaz", "77777", "77777");
+        List<WebElement> result = PO_SignUpView.checkElementByKey(driver, "Error.signup.lastName.length", PO_Properties.getSPANISH() );
+
+        //Comprobamos el error de contraseñas distintas
+        String checkText = PO_HomeView.getP().getString("Error.signup.lastName.length", PO_Properties.getSPANISH());
         Assertions.assertEquals(checkText , result.get(0).getText());
     }
 
