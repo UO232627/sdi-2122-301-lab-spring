@@ -243,6 +243,7 @@ class NotaneitorApplicationTests {
     }
     */
 
+    /**
     @Test
     @Order(17)
     public void PR11() {
@@ -257,5 +258,6 @@ class NotaneitorApplicationTests {
         List<WebElement> result = PO_View.checkElementBy(driver, "text", checkText);
         Assertions.assertEquals(checkText, result.get(0).getText());
     }
+    */
 
 }

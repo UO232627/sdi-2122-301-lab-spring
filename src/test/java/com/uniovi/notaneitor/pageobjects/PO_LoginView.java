@@ -21,4 +21,8 @@ public class PO_LoginView extends PO_NavView {
         driver.findElement(boton).click();
     }
 
+    static public void disconect(WebDriver driver){
+        WebElement disconectButton = driver.findElement(By.name("disconect"));
+    }
+
 }
